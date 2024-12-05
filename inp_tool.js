@@ -6,7 +6,7 @@ function sendINPData(data) {
 }
 
 // Funktion zur Aktualisierung der Tabelle
-function updateTable(interaction, timeStamp) {
+function updateTable(interaction, timeStamp, url) {
     const tableBody = document.querySelector('#inp-table tbody');
     if (!tableBody) {
         console.error("Tabelle nicht gefunden!");
@@ -23,6 +23,7 @@ function updateTable(interaction, timeStamp) {
         <td>${interaction.duration.toFixed(2)} ms</td>
         <td>${timeStamp}</td>
         <td>${interaction.elementId || 'No ID'}</td>
+        <td>${url}</td>
     `;
 
     tableBody.appendChild(row);
@@ -31,7 +32,7 @@ function updateTable(interaction, timeStamp) {
 
 // Observer zur Erfassung der INP-Daten
 const observer = new PerformanceObserver((list) => {
-    console.log("PerformanceObserver triggered.");
+    //console.log("PerformanceObserver triggered.");
     for (const entry of list.getEntries()) {
         //console.log("Observed Entry:", entry);
 
@@ -49,12 +50,13 @@ const observer = new PerformanceObserver((list) => {
 
             const inpData = {
                 longestInteraction: worstInteraction,
-                timeStamp: new Date().toISOString()
+                timeStamp: new Date().toISOString(),
+                url: window.location.href // URL der aktuellen Seite
             };
 
             //console.log("Updated Worst INP:", inpData);
             sendINPData(inpData); // Optional: Daten an Server senden
-            updateTable(worstInteraction, inpData.timeStamp); // Tabelle aktualisieren
+            updateTable(worstInteraction, inpData.timeStamp, inpData.url); // Tabelle aktualisieren
         }
     }
 });
@@ -62,7 +64,7 @@ const observer = new PerformanceObserver((list) => {
 // Observer starten
 try {
     observer.observe({ type: 'event', buffered: true });
-    console.log("Observer gestartet!");
+   // console.log("Observer gestartet!");
 } catch (error) {
     console.error("PerformanceObserver Fehler:", error);
 }

@@ -46,6 +46,7 @@
                 <th>Duration (ms)</th>
                 <th>Timestamp</th>
                 <th>Element ID</th>
+                <th>URL</th>
             </tr>
         </thead>
         <tbody>
@@ -60,7 +61,7 @@
         }
 
         // Funktion zur Aktualisierung der Tabelle
-        function updateTable(interaction, timeStamp) {
+        function updateTable(interaction, timeStamp, url) {
             const tableBody = document.querySelector('#inp-table tbody');
             if (!tableBody) {
                 console.error("Tabelle nicht gefunden!");
@@ -77,6 +78,7 @@
                 <td>${interaction.duration.toFixed(2)} ms</td>
                 <td>${timeStamp}</td>
                 <td>${interaction.elementId || 'No ID'}</td>
+                <td>${url}</td>
             `;
 
             tableBody.appendChild(row);
@@ -103,12 +105,13 @@
 
                     const inpData = {
                         longestInteraction: worstInteraction,
-                        timeStamp: new Date().toISOString()
+                        timeStamp: new Date().toISOString(),
+                        url: window.location.href // URL der aktuellen Seite
                     };
 
                     console.log("Updated Worst INP:", inpData);
                     sendINPData(inpData); // Optional: Daten an Server senden
-                    updateTable(worstInteraction, inpData.timeStamp); // Tabelle aktualisieren
+                    updateTable(worstInteraction, inpData.timeStamp, inpData.url); // Tabelle aktualisieren
                 } else {
                     console.log("New interaction duration is smaller, table not updated.");
                 }
