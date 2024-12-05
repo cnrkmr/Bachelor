@@ -16,8 +16,8 @@ Dieses Script wurde im Rahmen meiner Bachelorarbeit entwickelt, die sich mit dem
 
 ## Dateistruktur
 
-- `index.html`: Enthält eine Beispielseite, die mit dem Script aus `script.js` ausgestattet ist, um die INP-Messung direkt zu testen. Die HTML-Datei enthält auch eine Tabelle zur Anzeige der Ergebnisse.
-- `script.js`: Implementiert den Hauptcode für die INP-Messung. Der Code ist so gestaltet, dass er leicht erweiterbar ist und unabhängig von lokalen Elementen funktioniert.
+- `index.html`: Enthält eine Beispielseite, die mit dem Script aus `inp_tool.js` ausgestattet ist, um die INP-Messung direkt zu testen. Die HTML-Datei enthält auch eine Tabelle zur Anzeige der Ergebnisse.
+- `inp_tool.js`: Implementiert den Hauptcode für die INP-Messung. Der Code ist so gestaltet, dass er leicht erweiterbar ist und unabhängig von lokalen Elementen funktioniert.
 - `style.css`: Optional, für die Gestaltung der HTML-Tabelle.
 
 ---
